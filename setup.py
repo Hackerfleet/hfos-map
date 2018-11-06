@@ -43,17 +43,17 @@ This software package is a plugin module for HFOS.
       install_requires=[
             'hfos>=1.2.0',
       ],
-      entry_points="""[hfos.components]
+      entry_points="""[isomer.components]
     gdal=hfos.map.gdal:GDAL
     mts=hfos.map.maptileservice:MaptileService
     mtl=hfos.map.maptileservice:MaptileLoader
-[hfos.schemata]
+[isomer.schemata]
     geoobject=hfos.map.schemata.geoobject:GeoObject
     layer=hfos.map.schemata.layer:Layer
     layergroup=hfos.map.schemata.layergroup:LayerGroup
     mapview=hfos.map.schemata.mapview:MapView
     route=hfos.map.schemata.route:Route
-[hfos.provisions]
+[isomer.provisions]
     layer=hfos.map.provisions.layer:provision
     layergroup=hfos.map.provisions.layergroup:provision
     mapview=hfos.map.provisions.mapview:provision

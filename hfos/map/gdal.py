@@ -37,12 +37,12 @@ import os
 
 # from circuits import Worker, task
 
-from hfos.component import ConfigurableComponent, handler
-from hfos.events.system import authorizedevent
-from hfos.events.client import send
-from hfos.database import objectmodels, instance
-from hfos.logger import error, verbose, warn, debug
-from hfos.misc import std_uuid
+from isomer.component import ConfigurableComponent, handler
+from isomer.events.system import authorized_event
+from isomer.events.client import send
+from isomer.database import objectmodels, instance
+from isomer.logger import error, verbose, warn, debug
+from isomer.misc import std_uuid
 import datetime
 import xml.etree.ElementTree
 
@@ -67,11 +67,11 @@ class UrlError(Exception):
     pass
 
 
-class mapimport(authorizedevent):
+class mapimport(authorized_event):
     """Uploads a GDAL map file for conversion"""
 
 
-class rescan(authorizedevent):
+class rescan(authorized_event):
     """Triggers a rescan of the GDAL map folder"""
 
 
@@ -79,7 +79,7 @@ class GDAL(ConfigurableComponent):
     """
     GDAL Map conversion component
     """
-    channel = "hfosweb"
+    channel = 'isomer-web'
 
     configprops = {}
 

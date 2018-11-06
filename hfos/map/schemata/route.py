@@ -39,8 +39,8 @@ Provisions
 
 """
 
-from hfos.schemata.defaultform import editbuttons
-from hfos.schemata.base import base_object
+from isomer.schemata.defaultform import editbuttons
+from isomer.schemata.base import base_object
 
 RouteSchema = base_object('route',
                           roles_read=['admin', 'crew'],

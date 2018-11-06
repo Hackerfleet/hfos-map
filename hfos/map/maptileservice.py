@@ -34,6 +34,7 @@ Autonomously operating local tilecache
 
 import socket
 import os
+# TODO: Kick out 2.x compat
 import six
 import errno
 
@@ -41,16 +42,18 @@ from copy import copy
 from circuits import Worker, task, Event
 from circuits.web.tools import serve_file
 
-from hfos.component import ConfigurableController, ConfigurableComponent, \
-    handler, authorizedevent
-from hfos.events.client import send
-from hfos.misc import std_uuid
-from hfos.database import objectmodels, instance
-from hfos.debugger import cli_register_event
-from hfos.logger import error, verbose, warn, debug
+from isomer.component import ConfigurableController, ConfigurableComponent, \
+    handler, authorized_event
+from isomer.events.client import send
+from isomer.misc import std_uuid
+from isomer.misc.path import get_path
+from isomer.database import objectmodels, instance
+from isomer.debugger import cli_register_event
+from isomer.logger import error, verbose, warn, debug
 
 from .TileTools import TileFinder, TileUtils
 
+# TODO: Kick out 2.x compat
 if six.PY2:
     from urllib import unquote, urlopen
 else:
@@ -69,6 +72,7 @@ def get_tile(url):
     connection = None
 
     try:
+        # TODO: Kick out 2.x compat
         if six.PY3:
             connection = urlopen(url=url, timeout=2)  # NOQA
         else:
@@ -96,19 +100,19 @@ class UrlError(Exception):
     pass
 
 
-class request_maptile_area(authorizedevent):
+class request_maptile_area(authorized_event):
     pass
 
 
-class queue_trigger(authorizedevent):
+class queue_trigger(authorized_event):
     pass
 
 
-class queue_cancel(authorizedevent):
+class queue_cancel(authorized_event):
     pass
 
 
-class queue_remove(authorizedevent):
+class queue_remove(authorized_event):
     pass
 
 
@@ -126,20 +130,22 @@ class MaptileLoader(ConfigurableComponent):
 
     channel = 'hfosweb'
 
-    def __init__(self, tile_path=os.path.join('/var/cache/hfos', instance),
-                 **kwargs):
+    def __init__(self, *args, **kwargs):
         """
 
         :param tile_path: Caching directory structure target path
         :param default_tile: Used, when no tile can be cached
         :param kwargs:
         """
-        super(MaptileLoader, self).__init__('MTL', **kwargs)
+        super(MaptileLoader, self).__init__('MTL', *args, **kwargs)
+
+        for item in ['tilecache', 'rastertiles', 'rastercache']:
+            get_path('cache', item, ensure=True)
+
+        self.cache_path = get_path('cache', '')
 
         self.worker = Worker(process=False, workers=2,
                              channel="tclworkers").register(self)
-
-        self.cache_path = tile_path
 
         self.cancelled = []
         self.requests = {}
@@ -400,8 +406,7 @@ class MaptileService(ConfigurableController):
 
     configprops = {}
 
-    def __init__(self, tile_path=os.path.join('/var/cache/hfos', instance), default_tile=None,
-                 **kwargs):
+    def __init__(self, default_tile=None, **kwargs):
         """
 
         :param tile_path: Caching directory structure target path
@@ -412,7 +417,11 @@ class MaptileService(ConfigurableController):
         self.worker = Worker(process=False, workers=2,
                              channel="tcworkers").register(self)
 
-        self.cache_path = tile_path
+        for item in ['tilecache', 'rastertiles', 'rastercache']:
+            get_path('cache', item, ensure=True)
+
+        self.cache_path = get_path('cache', '')
+
         self.default_tile = default_tile
         self._tiles = []
 

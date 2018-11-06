@@ -39,8 +39,8 @@ Provisions
 
 """
 
-from hfos.schemata.defaultform import defaultform, section, editbuttons
-from hfos.schemata.base import base_object
+from isomer.schemata.defaultform import defaultform, section, editbuttons
+from isomer.schemata.base import base_object
 
 LayerSchema = base_object('layer',
                           roles_read=['admin', 'crew'],

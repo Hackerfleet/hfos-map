@@ -39,8 +39,8 @@ Provisions
 
 """
 
-from hfos.schemata.defaultform import defaultform, section, lookup_field, editbuttons
-from hfos.schemata.base import base_object, uuid_object
+from isomer.schemata.defaultform import defaultform, section, lookup_field, editbuttons
+from isomer.schemata.base import base_object, uuid_object
 
 GeoObjectSchema = base_object('geoobject', all_roles='crew')
 

@@ -17,7 +17,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-from hfos.schemata.extends import DefaultExtension
+from isomer.schemata.extends import DefaultExtension
 
 __author__ = "Heiko 'riot' Weinen"
 __license__ = "AGPLv3"
@@ -34,8 +34,8 @@ MapView: User generated Mapviews
 
 
 """
-from hfos.schemata.defaultform import lookup_field, editbuttons
-from hfos.schemata.base import base_object, uuid_object
+from isomer.schemata.defaultform import lookup_field, editbuttons
+from isomer.schemata.base import base_object, uuid_object
 
 MapViewSchema = base_object('mapview',
                             roles_read=['admin', 'crew'],
