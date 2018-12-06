@@ -128,7 +128,7 @@ class MaptileLoader(ConfigurableComponent):
 
     configprops = {}
 
-    channel = 'hfosweb'
+    channel = 'isomer-web'
 
     def __init__(self, *args, **kwargs):
         """

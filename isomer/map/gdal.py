@@ -177,7 +177,7 @@ class GDAL(ConfigurableComponent):
         newlayer = self._register_map(name.rstrip('.KAP'), target.rstrip('.KAP'), event.client)
 
         notification = {
-            'component': 'hfos.alert.manager',
+            'component': 'isomer.alert.manager',
             'action': 'notify',
             'data': {
                 'message': 'New rasterchart rendered: <a href="#!/editor/layer/' + str(
@@ -222,7 +222,7 @@ class GDAL(ConfigurableComponent):
             data = 'No new rastercharts added.'
 
         notification = {
-            'component': 'hfos.alert.manager',
+            'component': 'isomer.alert.manager',
             'action': 'notify',
             'data': {
                 'message': data,
