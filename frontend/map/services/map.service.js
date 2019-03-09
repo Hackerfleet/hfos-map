@@ -87,9 +87,9 @@ class MapService {
 
         this.get_offline_data = function (extent, zoom, layers) {
             console.log('[MAPSVC] Requesting extent for offline use');
-         
+
             let event = {
-                component: 'hfos.map.maptileservice',
+                component: 'isomer.map.maptileservice',
                 action: 'request_maptile_area',
                 data: {
                     extent: extent,
@@ -107,7 +107,7 @@ class MapService {
         this.queue_trigger = function (uuid) {
             console.log('[MAPSVC] Requesting download of queue', uuid);
             let event = {
-                'component': 'hfos.map.maptileservice',
+                'component': 'isomer.map.maptileservice',
                 'action': 'queue_trigger',
                 'data': uuid
             };
@@ -116,7 +116,7 @@ class MapService {
         this.queue_cancel = function () {
             console.log('[MAPSVC] Requesting cancellation of queues');
             let event = {
-                'component': 'hfos.map.maptileservice',
+                'component': 'isomer.map.maptileservice',
                 'action': 'queue_cancel'
             };
             self.socket.send(event);
@@ -124,13 +124,13 @@ class MapService {
         this.queue_remove = function (uuid) {
             console.log('[MAPSVC] Requesting removal of queue', uuid);
             let event = {
-                'component': 'hfos.map.maptileservice',
+                'component': 'isomer.map.maptileservice',
                 'action': 'queue_remove',
                 'data': uuid
             };
             self.socket.send(event);
         };
-        
+
         function handle_maptileservice(msg) {
             if (msg.action === 'queued') {
                 console.log('[MAPSVC] Loader request was queued');
@@ -147,7 +147,8 @@ class MapService {
                 delete self.offline_loader_queue[msg.data.uuid];
             }
         }
-        this.socket.listen('hfos.map.maptileservice', handle_maptileservice);
+
+        this.socket.listen('isomer.map.maptileservice', handle_maptileservice);
     }
 
 
@@ -156,7 +157,7 @@ class MapService {
 
         let file = document.getElementById('filename').files[0];
         console.log('file: ', file);
-        this.socket.sendFile(file, 'hfos.map.gdal', 'mapimport');
+        this.socket.sendFile(file, 'isomer.map.gdal', 'mapimport');
 
     }
 
@@ -164,7 +165,7 @@ class MapService {
         console.log('Triggering rastertile path rescan.');
 
         this.socket.send({
-            component: 'hfos.map.gdal',
+            component: 'isomer.map.gdal',
             action: 'rescan'
         });
 
