@@ -1,4 +1,4 @@
-@import '../../../scss/colors';
+@import '~scss/colors';
 
 .leaflet-control-container > div {
   z-index: 30;
@@ -10,7 +10,6 @@
     color: $color-primary-2 !important;
   }
 }
-
 
 .leaflet-grid-label .lng {
   margin-left: 8px;
@@ -45,12 +44,12 @@
 
 .leaflet-grid-label .gridlabel-vert,
 .leaflet-grid-label .gridlabel-horiz {
-  padding-left:2px;
+  padding-left: 2px;
   mix-blend-mode: difference;
   text-shadow: -1px -1px 0 $color-gray-light,
-               1px -1px 0 $color-gray-light,
-               -1px 1px 0 $color-gray-light,
-               1px 1px $color-gray-light;
+  1px -1px 0 $color-gray-light,
+  -1px 1px 0 $color-gray-light,
+  1px 1px $color-gray-light;
 }
 
 #map-sidebar ul {
@@ -123,10 +122,10 @@
   content: '\21a6';
 }
 
-
 .layer_zoom_levels .slider-handle.custom:last-of-type {
   margin-left: -20px;
 }
+
 .layer_zoom_levels .slider-handle.custom:last-of-type::before {
   content: '\21a4';
 }
