@@ -3,7 +3,7 @@
 
 # HFOS - Hackerfleet Operating System
 # ===================================
-# Copyright (C) 2011-2018 Heiko 'riot' Weinen <riot@c-base.org> and others.
+# Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -79,10 +79,11 @@ GeoObjectSchema['properties'].update({
         'type': 'number', 'description': 'Maximum zoom number.',
         'default': 18
     },
-    'opacity': {'type': 'number',
-                'description': 'The opacity of the GeoObject.',
-                'default': 1.0
-                },
+    'opacity': {
+        'type': 'number',
+        'description': 'The opacity of the GeoObject.',
+        'default': 1.0
+    },
     'zIndex': {
         'type': 'number',
         'description': 'The explicit zIndex of the GeoObject.'

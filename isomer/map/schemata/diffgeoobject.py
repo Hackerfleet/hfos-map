@@ -3,7 +3,7 @@
 
 # HFOS - Hackerfleet Operating System
 # ===================================
-# Copyright (C) 2011-2018 Heiko 'riot' Weinen <riot@c-base.org> and others.
+# Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -51,28 +51,43 @@ GeoObjectSchema['properties'].update({
         'type': 'string',
         'title': 'Unique GeoObject Layer ID'
     },
-    'iconcolor': {'type': 'string', 'title': 'Icon Color',
-                  # 'format': 'color',
-                  'description': 'GeoObject icon color indicator', 'default':
-                      'white'},
+    'iconcolor': {
+        'type': 'string', 'title': 'Icon Color',
+        # 'format': 'color',
+        'description': 'GeoObject icon color indicator', 'default':
+            'white'
+    },
     'newvar': {'type': 'string', 'title': 'Foobar'},
-    'icon': {'type': 'number', 'title': 'Icon',
-             'description': 'Custom user icon', 'default': 'flag'},
-    'shared': {'type': 'boolean', 'title': 'Shared GeoObject',
-               'description': 'Share GeoObject with the crew'},
-    'notes': {'type': 'string', 'format': 'html', 'title': 'User notes',
-              'description': 'Custom user notes'},
-    'minZoom': {'type': 'number', 'description': 'Minimum zoom number.',
-                'default': 0},
-    'maxZoom': {'type': 'number', 'description': 'Maximum zoom number.',
-                'default': 18},
-    'opacity': {'type': 'number',
-                'description': 'The opacity of the GeoObject.',
-                'default': 1.0},
-    'zIndexFoo': {'type': 'number',
-                  'description': 'The explicit zIndex of the GeoObject.'
-                                 'Not set by default.',
-                  },
+    'icon': {
+        'type': 'number', 'title': 'Icon',
+        'description': 'Custom user icon', 'default': 'flag'
+    },
+    'shared': {
+        'type': 'boolean', 'title': 'Shared GeoObject',
+        'description': 'Share GeoObject with the crew'
+    },
+    'notes': {
+        'type': 'string', 'format': 'html', 'title': 'User notes',
+        'description': 'Custom user notes'
+    },
+    'minZoom': {
+        'type': 'number', 'description': 'Minimum zoom number.',
+        'default': 0
+    },
+    'maxZoom': {
+        'type': 'number', 'description': 'Maximum zoom number.',
+        'default': 18
+    },
+    'opacity': {
+        'type': 'number',
+        'description': 'The opacity of the GeoObject.',
+        'default': 1.0
+    },
+    'zIndexFoo': {
+        'type': 'number',
+        'description': 'The explicit zIndex of the GeoObject.'
+                       'Not set by default.',
+    },
 
     'geojson': {
         'type': 'object',

@@ -3,7 +3,7 @@
 
 # HFOS - Hackerfleet Operating System
 # ===================================
-# Copyright (C) 2011-2018 Heiko 'riot' Weinen <riot@c-base.org> and others.
+# Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -45,14 +45,22 @@ MapViewSchema = base_object('mapview',
                             )
 
 MapViewSchema['properties'].update({
-    'name': {'type': 'string', 'minLength': 1, 'title': 'Name',
-             'description': 'Name of view'},
-    'color': {'type': 'string', 'title': 'View Color', 'format': 'color',
-              'description': 'This views color indicator'},
-    'notes': {'type': 'string', 'format': 'html', 'title': 'User notes',
-              'description': 'Custom user notes'},
-    'viewtype': {'enum': ['vessel', 'user'], 'title': 'View Type',
-                 'description': 'Shows what type of mapview this is'},
+    'name': {
+        'type': 'string', 'minLength': 1, 'title': 'Name',
+        'description': 'Name of view'
+    },
+    'color': {
+        'type': 'string', 'title': 'View Color', 'format': 'color',
+        'description': 'This views color indicator'
+    },
+    'notes': {
+        'type': 'string', 'format': 'html', 'title': 'User notes',
+        'description': 'Custom user notes'
+    },
+    'viewtype': {
+        'enum': ['vessel', 'user'], 'title': 'View Type',
+        'description': 'Shows what type of mapview this is'
+    },
     'layergroups': {
         'type': 'array',
         'description': 'List of available Layergroups',

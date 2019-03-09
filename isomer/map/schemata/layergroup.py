@@ -3,7 +3,7 @@
 
 # HFOS - Hackerfleet Operating System
 # ===================================
-# Copyright (C) 2011-2018 Heiko 'riot' Weinen <riot@c-base.org> and others.
+# Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -50,14 +50,22 @@ LayerGroupSchema = base_object('layergroup',
                                )
 
 LayerGroupSchema['properties'].update({
-    'owner': {'type': 'string', 'minLength': 36,
-              'title': "Owner's Unique ID", 'description': 'HIDDEN'},
-    'color': {'type': 'string', 'title': 'Group Color', 'format': 'color',
-              'description': 'This group''s color indicator'},
-    'shared': {'type': 'boolean', 'title': 'Shared group',
-               'description': 'Share group with the crew'},
-    'notes': {'type': 'string', 'format': 'html', 'title': 'User notes',
-              'description': 'Custom user notes'},
+    'owner': {
+        'type': 'string', 'minLength': 36,
+        'title': "Owner's Unique ID", 'description': 'HIDDEN'
+    },
+    'color': {
+        'type': 'string', 'title': 'Group Color', 'format': 'color',
+        'description': 'This group''s color indicator'
+    },
+    'shared': {
+        'type': 'boolean', 'title': 'Shared group',
+        'description': 'Share group with the crew'
+    },
+    'notes': {
+        'type': 'string', 'format': 'html', 'title': 'User notes',
+        'description': 'Custom user notes'
+    },
     'layers': {
         'type': 'array',
         'items': uuid_object('Unique Layer ID')

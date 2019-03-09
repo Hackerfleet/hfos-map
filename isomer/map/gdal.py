@@ -3,7 +3,7 @@
 
 # HFOS - Hackerfleet Operating System
 # ===================================
-# Copyright (C) 2011-2018 Heiko 'riot' Weinen <riot@c-base.org> and others.
+# Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -108,7 +108,7 @@ class GDAL(ConfigurableComponent):
         self.tiler_binary = '/usr/bin/gdal2tiles.py'
 
         if (not os.path.exists(self.translate_binary) or not os.path.exists(
-            self.tiler_binary)):
+                self.tiler_binary)):
             self.log('No gdal tools found, will not be able to generate '
                      'tiles from foreign chart formats.', lvl=warn)
 

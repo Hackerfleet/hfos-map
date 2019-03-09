@@ -3,7 +3,7 @@
 
 # HFOS - Hackerfleet Operating System
 # ===================================
-# Copyright (C) 2011-2018 Heiko 'riot' Weinen <riot@c-base.org> and others.
+# Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -240,7 +240,7 @@ class MaptileLoader(ConfigurableComponent):
 
         if tile_counter == 0:
             response = {
-                'component': 'hfos.map.maptileservice',
+                'component': 'isomer.map.maptileservice',
                 'action': 'empty',
                 'data': "No tiles in that area to fetch"
             }
@@ -268,7 +268,7 @@ class MaptileLoader(ConfigurableComponent):
             output.pop('lists')
 
             response = {
-                'component': 'hfos.map.maptileservice',
+                'component': 'isomer.map.maptileservice',
                 'action': 'queued',
                 'data': output
             }
@@ -293,7 +293,7 @@ class MaptileLoader(ConfigurableComponent):
             queue = self.requests.pop(uuid)
             queue.pop('lists')
             response = {
-                'component': 'hfos.map.maptileservice',
+                'component': 'isomer.map.maptileservice',
                 'action': 'removed',
                 'data': queue
             }
@@ -327,7 +327,7 @@ class MaptileLoader(ConfigurableComponent):
                     self.fire(task)
 
             response = {
-                'component': 'hfos.map.maptileservice',
+                'component': 'isomer.map.maptileservice',
                 'action': 'acting',
                 'data': uuid
             }
@@ -387,7 +387,7 @@ class MaptileLoader(ConfigurableComponent):
                 self.log('Sending progress report:', completed, '/',
                          self.requests[queue]['tiles'])
                 progress_report = {
-                    'component': 'hfos.map.maptileservice',
+                    'component': 'isomer.map.maptileservice',
                     'action': 'offline_loader_progress',
                     'data': {
                         'queue': queue,

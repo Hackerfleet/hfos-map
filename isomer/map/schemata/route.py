@@ -3,7 +3,7 @@
 
 # HFOS - Hackerfleet Operating System
 # ===================================
-# Copyright (C) 2011-2018 Heiko 'riot' Weinen <riot@c-base.org> and others.
+# Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -50,18 +50,22 @@ RouteSchema = base_object('route',
                           )
 
 RouteSchema['properties'].update({
-    'color': {'type': 'string', 'title': 'Group Color', 'format': 'color',
-              'description': 'This group''s color indicator'},
-    'notes': {'type': 'string', 'format': 'html', 'title': 'User notes',
-              'description': 'Custom user notes'},
+    'color': {
+        'type': 'string', 'title': 'Group Color', 'format': 'color',
+        'description': 'This group''s color indicator'
+    },
+    'notes': {
+        'type': 'string', 'format': 'html', 'title': 'User notes',
+        'description': 'Custom user notes'
+    },
     'etd': {
-        'type': 'integer',
+        'type': 'string',
         'format': 'datetimepicker',
         'title': 'ETD',
         'description': 'Estimated Time of Departure'
     },
     'eta': {
-        'type': 'integer',
+        'type': 'string',
         'format': 'datetimepicker',
         'title': 'ETA',
         'description': 'Estimated Time of Arrival'
@@ -77,28 +81,28 @@ RouteSchema['properties'].update({
         'description': 'Destination Port'
     },
     'ettt': {
-        'type': 'integer',
+        'type': 'string',
         'format': 'datetimepicker',
         'title': 'ETTT',
         'description': 'estimated total travel time',
         'readonly': True,
     },
     'attt': {
-        'type': 'integer',
+        'type': 'string',
         'format': 'datetimepicker',
         'title': 'ATTT',
         'description': 'actual total travel time',
         'readonly': True,
     },
     'atd': {
-        'type': 'integer',
+        'type': 'string',
         'format': 'datetimepicker',
         'title': 'ATD',
         'description': 'actual time of departure',
         'readonly': True,
     },
     'ata': {
-        'type': 'integer',
+        'type': 'string',
         'format': 'datetimepicker',
         'title': 'ATA',
         'description': 'Actual time of arrival',
