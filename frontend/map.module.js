@@ -9,7 +9,7 @@ import uirouter from 'angular-ui-router';
 
 import leafletdirective from 'angular-leaflet-directive';
 
-import { routing } from './map.config.js';
+import {routing} from './map.config.js';
 
 import mapcomponent from './map/components/map.js';
 import maptemplate from './map/components/map.tpl.html';

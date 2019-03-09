@@ -528,10 +528,10 @@ class mapcomponent {
                 }
                 L.popup.angular({
                     template: '<h2>' + obj.name + '</h2>' +
-                    '<small>' + type + '</small>' +
-                    '<div ng-bind-html="popup.notes | embed:popup.user.embed_options"></div>' +
-                    '<small><a href="#!/editor/geoobject/' + uuid + '/edit">Edit Object in Editor</a></small><br />' +
-                    '<small><a ng-click="popup.zoom_to_geoobject()">Zoom to</a></small>',
+                        '<small>' + type + '</small>' +
+                        '<div ng-bind-html="popup.notes | embed:popup.user.embed_options"></div>' +
+                        '<small><a href="#!/editor/geoobject/' + uuid + '/edit">Edit Object in Editor</a></small><br />' +
+                        '<small><a ng-click="popup.zoom_to_geoobject()">Zoom to</a></small>',
                     controllerAs: 'popup',
                     controller: ['user', function (user) {
                         this.user = user;
@@ -780,7 +780,7 @@ class mapcomponent {
             self.requestMapData();
         });
 
-        this.resize =  function () {
+        this.resize = function () {
             self.timeout(function () {
                     self.map.invalidateSize()
                 },
