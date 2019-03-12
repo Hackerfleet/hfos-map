@@ -128,7 +128,7 @@ MapViewForm = [
 ]
 
 MapViewExtends = DefaultExtension(
-    {'mapviewuuid': uuid_object('Default Mapview')},
+    {'mapviewuuid': uuid_object('Default Mapview', default='b69104cf-8ee7-4c81-aeca-dde272d67b63')},
     lookup_field('modules.mapviewuuid', 'mapview')
 )
 
