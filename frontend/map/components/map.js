@@ -30,8 +30,6 @@ import L from 'leaflet';
 import Geo from 'mt-geo';
 import LatLon from 'geodesy/latlon-vincenty';
 
-import sidebar from './mapsidebar.tpl.html';
-
 import leafletoverpasslayer from 'leaflet-overpass-layer';
 import leafletdraw from 'leaflet-draw';
 import leafletterminator from 'leaflet-terminator';
@@ -1356,8 +1354,8 @@ class mapcomponent {
 
         this.scope.$on('$destroy', function () {
             console.log('[MAP] Destroying controller');
-            console.log(self.mapsidebar);
-            self.mapsidebar.hide();
+            /*console.log(self.mapsidebar);
+            self.mapsidebar.hide();*/
         })
     }
 
