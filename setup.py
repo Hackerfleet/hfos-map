@@ -25,7 +25,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="hfos-map",
-    version="0.0.1",
+    version="1.1.0",
     description="hfos-map",
 
     author="Hackerfleet Community",
@@ -35,9 +35,9 @@ setup(
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Web Environment',
-        'Framework :: Isomer :: 1',
+        # 'Framework :: Isomer :: 1',
         'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
-        'Operating System :: Linux',
+        'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3.5',
@@ -65,6 +65,7 @@ This software package is a plugin module for HFOS.
     gdal=isomer.map.gdal:GDAL
     mts=isomer.map.maptileservice:MaptileService
     mtl=isomer.map.maptileservice:MaptileLoader
+    mtr=isomer.map.maptilerenderer:MaptileRenderer
 [isomer.schemata]
     geoobject=isomer.map.schemata.geoobject:GeoObject
     layer=isomer.map.schemata.layer:Layer
