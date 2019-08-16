@@ -246,7 +246,9 @@ class mapcomponent {
 
             this.defaults = {
                 map: {
-                    contextmenu: true,
+                    // TODO: Fix this by upgrading and debugging all new problems.
+                    //  <3 JS
+                    contextmenu: false,
                     contextmenuWidth: 140,
                     contextmenuItems: [{
                         text: 'Copy coordinates',
@@ -555,6 +557,9 @@ class mapcomponent {
                     layer.url = layer.url.replace('http://hfoshost/', self.host);
                 }
 
+                layer.layerOptions.errorTileUrl = self.host + 'assets/tile_missing.png';
+                layer.layerOptions.crossOrigin = self.user.useruuid;
+
                 if (typeof layer.layerOptions.minZoom === 'undefined') {
                     layer.layerOptions.minZoom = 0;
                 }
@@ -809,7 +814,11 @@ class mapcomponent {
 
         this.syncFromMapview = function () {
             if (self.mapviewuuid !== null) {
+                let zoom = self.center.zoom;
                 self.center = self.mapview.coords;
+                if (this.followlayers === false) {
+                    self.center.zoom = zoom;
+                }
                 self.scope.$apply();
                 console.log('[MAP] Sync from MV: ', self.center);
             }
@@ -964,6 +973,7 @@ class mapcomponent {
                         self.followlayers = true;
                         self.subscribe();
                         control.state('following');
+                        self.notification.add('success', 'Following', 'Following mapview.', 2)
                     }
                 }, {
                     stateName: 'following',
@@ -971,6 +981,7 @@ class mapcomponent {
                     onClick: function (control) {
                         self.followlayers = false;
                         control.state('followinglimited');
+                        self.notification.add('success', 'Following limited', 'Limited following mapview.', 2)
                     }
                 }, {
                     stateName: 'followinglimited',
@@ -979,6 +990,7 @@ class mapcomponent {
                         self.follow = false;
                         self.unsubscribe();
                         control.state('static');
+                        self.notification.add('success', 'Not following', 'Following deactivated.', 2)
                     }
                 }],
                 title: 'Toggle map following'
@@ -997,6 +1009,7 @@ class mapcomponent {
                         console.log('[MAP] Enabling synchronization');
                         self.sync = true;
                         control.state('synchronized');
+                        self.notification.add('success', 'Synchronizing', 'Synchronizing mapview to node.', 2)
                     }
                 }, {
                     stateName: 'synchronized',
@@ -1005,6 +1018,7 @@ class mapcomponent {
                         console.log('[MAP] Disabling synchronization');
                         self.sync = false;
                         control.state('unsynchronized');
+                        self.notification.add('success', 'Not synchronizing', 'Stopped mapview synchronization.', 2)
                     }
                 }],
                 title: 'Toggle synchronization to ship'
@@ -1045,6 +1059,7 @@ class mapcomponent {
                         control.state('high');
                         self.toggle_vessels('high');
                         update_show_vessels();
+                        self.notification.add('success', 'Vessel display', 'Displaying vessels - high details.', 2)
                     }
                 }, {
                     stateName: 'high',
@@ -1054,6 +1069,7 @@ class mapcomponent {
                         $('#btn_togglevesseldisplay').css({'color': '#aaa'});
                         control.state('off');
                         self.toggle_vessels('off');
+                        self.notification.add('success', 'Vessel display', 'Deactivated vessel display.', 2)
                     }
                 }, {
                     stateName: 'off',
@@ -1064,6 +1080,7 @@ class mapcomponent {
                         control.state('low');
                         self.toggle_vessels('low');
                         update_show_vessels();
+                        self.notification.add('success', 'Vessel display', 'Displaying vessels - low details.', 2)
                     }
                 }],
                 title: 'Toggle display of other nearby vessels'
@@ -1078,6 +1095,7 @@ class mapcomponent {
                         console.log('[MAP] Enabling radio range display');
                         $('#btn_toggleradiorange').css({'color': '#aaa'});
                         control.state('on');
+                        self.notification.add('success', 'Radio range', 'Displaying vessel radio ranges.', 2)
                     }
                 }, {
                     stateName: 'on',
@@ -1086,6 +1104,7 @@ class mapcomponent {
                         console.log('[MAP] Disabling radio range display');
                         $('#btn_toggleradiorange').css({'color': '#000'});
                         control.state('off');
+                        self.notification.add('success', 'Radio range', 'Hiding vessel radio ranges.', 2)
                     }
                 }],
                 title: 'Toggle radio range display of nearby vessels'
@@ -1101,6 +1120,7 @@ class mapcomponent {
                         $('#btn_toggleterminator').css({'color': '#aaa'});
                         control.state('on');
                         map.removeLayer(self.terminator);
+                        self.notification.add('success', 'Night side', 'Hiding night side.', 2)
                     }
                 }, {
                     stateName: 'on',
@@ -1110,6 +1130,7 @@ class mapcomponent {
                         $('#btn_toggleterminator').css({'color': '#000'});
                         control.state('off');
                         self.terminator.addTo(map);
+                        self.notification.add('success', 'Night side', 'Displaying night side.', 2)
                     }
                 }],
                 title: 'Toggle display of terminator'

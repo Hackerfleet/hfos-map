@@ -46,8 +46,8 @@
                                     <li ng-repeat="(uuid, layer) in $ctrl.layers[name]">
                                         <!-- {{layer}} -->
                                         <span class="layer-expander fa" ng-class="
-                                               {'fa-chevron-right': $ctrl.layer_flags[uuid].expanded,
-                                                'fa-chevron-down': !$ctrl.layer_flags[uuid].expanded}"
+                                               {'fa-chevron-right': !$ctrl.layer_flags[uuid].expanded,
+                                                'fa-chevron-down': $ctrl.layer_flags[uuid].expanded}"
                                               ng-click="$ctrl.layer_flags[uuid].expanded = !$ctrl.layer_flags[uuid].expanded">
                                             </span>
                                         <a ng-click="$ctrl.switchLayer(uuid)">
