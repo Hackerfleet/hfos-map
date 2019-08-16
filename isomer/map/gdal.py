@@ -284,7 +284,7 @@ class GDAL(ConfigurableComponent):
                        [bounding_box['maxy'], bounding_box['maxx']]]
         }
         layer.creation = datetime.datetime.now().isoformat()
-        layer.url = 'http://hfoshost/rastertiles/' + name + '/{z}/{x}/{y}.png'
+        layer.url = 'http://hfoshost/tilecache/raster/' + name + '/{z}/{x}/{y}.png'
 
         layer.save()
 

@@ -34,8 +34,6 @@ Autonomously operating local tilecache
 
 import socket
 import os
-# TODO: Kick out 2.x compat
-import six
 import errno
 
 from copy import copy
@@ -53,14 +51,8 @@ from isomer.logger import error, verbose, warn, debug
 
 from .TileTools import TileFinder, TileUtils
 
-# TODO: Kick out 2.x compat
-if six.PY2:
-    from urllib import unquote, urlopen
-else:
-    # noinspection PyCompatibility
-    from urllib.request import urlopen  # NOQA
-    # noinspection PyCompatibility
-    from urllib.parse import unquote  # NOQA
+from urllib.request import Request, urlopen
+from urllib.parse import unquote
 
 
 def get_tile(url):
@@ -72,11 +64,16 @@ def get_tile(url):
     connection = None
 
     try:
-        # TODO: Kick out 2.x compat
-        if six.PY3:
-            connection = urlopen(url=url, timeout=2)  # NOQA
-        else:
-            connection = urlopen(url=url)
+        req = Request(
+            url,
+            data=None,
+            headers={
+                'User-Agent': 'ISOMER/HFOS Hackerfleet Operating System 1.3.0 '
+                              '- Automatic TileCache  1.1.0'
+            }
+        )
+
+        connection = urlopen(req, timeout=5)
     except Exception as e:
         log += "MTST: ERROR Tilegetter error: %s " % str([type(e), e, url])
 
@@ -406,6 +403,8 @@ class MaptileService(ConfigurableController):
 
     configprops = {}
 
+    channel = '/tilecache'
+
     def __init__(self, default_tile=None, **kwargs):
         """
 
@@ -455,10 +454,10 @@ class MaptileService(ConfigurableController):
 
         return filename, real_url
 
-    def rastertiles(self, event, *args, **kwargs):
+    def raster(self, event):
         request, response = event.args[:2]
         try:
-            filename, url = self._split_cache_url(request.path, 'rastertiles')
+            filename, url = self._split_cache_url(request.path, 'raster')
         except UrlError as e:
             self.log('Rastertile cache url error:', e, exc=True, lvl=warn)
             return
@@ -470,11 +469,18 @@ class MaptileService(ConfigurableController):
             self.log('Non-existing raster tile request:', filename,
                      lvl=verbose)
 
-    def tilecache(self, event, *args, **kwargs):
+    def index(self, event, *args, **kwargs):
         """Checks and caches a requested tile to disk, then delivers it to
         client"""
         request, response = event.args[:2]
-        self.log(request.path, lvl=verbose)
+
+        cookie = request.cookie.get('isomer-client', request.cookie.get('isomer-dev', None))
+
+        if cookie is None:
+            self.log('Client not authorized by cookie.',  lvl=warn)
+            return
+
+        # self.log(request.path, lvl=verbose)
         try:
             filename, url = self._split_cache_url(request.path, 'tilecache')
         except UrlError:
@@ -526,7 +532,8 @@ class MaptileService(ConfigurableController):
                             self.log("Writing error: %s" % str([type(e), e]), lvl=error)
 
                 except Exception as e:
-                    self.log("Open error on %s - %s" % (filename, str([type(e), e])), lvl=error)
+                    self.log("Open error on %s - %s" % (filename, str([type(e), e])),
+                             lvl=error)
                     return
                 finally:
                     event.stop()
