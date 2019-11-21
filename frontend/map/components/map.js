@@ -723,7 +723,11 @@ class mapcomponent {
             console.log('[MAP] Switching to new layergroup: ', uuid);
             self.clearLayers();
             self.layergroup = uuid;
-            self.addLayer(self.service.layergroups[uuid].layers)
+            try {
+                self.addLayer(self.service.layergroups[uuid].layers)
+            } catch (e) {
+                console.warn('[MAP] No layergroup found!');
+            }
         };
 
         this.switchMapview = function (uuid) {
