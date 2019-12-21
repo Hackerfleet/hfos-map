@@ -65,7 +65,6 @@ This software package is a plugin module for HFOS.
     gdal=isomer.map.gdal:GDAL
     mts=isomer.map.maptileservice:MaptileService
     mtl=isomer.map.maptileservice:MaptileLoader
-    mtr=isomer.map.maptilerenderer:MaptileRenderer
 [isomer.schemata]
     geoobject=isomer.map.schemata.geoobject:GeoObject
     layer=isomer.map.schemata.layer:Layer
